@@ -23,8 +23,8 @@ class Board
       [0,1,2], # horizontal rows
       [3,4,5],
       [6,7,8],
-      [0,3,6],
-      [1,4,7], # vertical rows
+      [0,3,6], # vertical rows
+      [1,4,7], 
       [2,5,8],
       [0,4,8], # diagonal patterns
       [2,4,6] 
@@ -37,16 +37,25 @@ class Board
   end
 
   def tie?
-    return false if @grid.include?(" ")
-    return false if winner_exists?
+    return false if @grid.include?(" ") || winner_exists?
     return true
   end
 
   def play_move(move={})
     if move[:player] == 1
-      grid[move[:position]] = "X"
+      @grid[move[:position]] = "X"
     elsif move[:player] == 2
-      grid[move[:position]] = "O"
+      @grid[move[:position]] = "O"
     end   
+  end
+
+  def available_spaces
+    available_spaces = []
+    @grid.each_with_index{|cell, index| available_spaces << index if cell == " "}
+    available_spaces
+  end
+
+  def reset(position)
+    @grid[position] = " "
   end
 end

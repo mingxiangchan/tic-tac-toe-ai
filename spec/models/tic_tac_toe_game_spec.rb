@@ -2,12 +2,6 @@ require 'rails_helper'
 
 describe TicTacToeGame do
   let(:game){ TicTacToeGame.new }
-  
-  describe '#initialize' do
-    it 'should generate a board' do
-      expect(game.board).to be_a(Board)
-    end
-  end
 
   describe '#game_over' do
     it 'should return true if tie' do
@@ -29,6 +23,23 @@ describe TicTacToeGame do
     end
   end
 
-  describe '#start!' do
+  describe '#start_new_game' do
+    it 'should generate a board' do
+      game.start_new_game
+      expect(game.board).to be_a(Board)
+    end
+  end
+
+  describe '#current_player' do
+    it 'is player 1 if no moves played' do
+      expect(game.current_player).to eq(1)
+    end
+
+    it 'changes player id on next turn' do
+      game.player = 1
+      expect(game.current_player).to eq(2)
+      game.player = 2
+      expect(game.current_player).to eq(1)
+    end
   end
 end
