@@ -2,14 +2,14 @@ class Board
   attr_accessor :grid
 
   def initialize(grid=nil)
-    grid ||= Array.new(3){ Array.new(3){" "}}
+    grid ||= Array.new(9){" "}
     @grid = grid
   end
 
   def find_winner
     player_1_moves = []
     player_2_moves = []
-    grid.flatten.each_with_index { |cell, index|
+    grid.each_with_index { |cell, index|
       player_1_moves << index if cell == "X"
       player_2_moves << index if cell == "O"
     }
@@ -37,7 +37,7 @@ class Board
   end
 
   def tie?
-    return false if @grid.flatten.include?(" ")
+    return false if @grid.include?(" ")
     return false if winner_exists?
     return true
   end

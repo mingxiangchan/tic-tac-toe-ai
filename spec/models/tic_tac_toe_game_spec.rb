@@ -28,4 +28,7 @@ describe TicTacToeGame do
       expect(game.game_over?).to be false
     end
   end
+
+  describe '#start!' do
+  end
 end

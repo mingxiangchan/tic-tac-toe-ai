@@ -3,7 +3,6 @@ require 'rails_helper'
 def create_winning_grid(winning_pattern)
   rand_win_pattern = winning_pattern[rand(0..7)]
   winning_grid = []
-  winning_grid_rows = []
   9.times {|i|
     if rand_win_pattern.include?(i) 
       winning_grid << "X"
@@ -11,21 +10,17 @@ def create_winning_grid(winning_pattern)
       winning_grid << " "
     end
   }
-  winning_grid.each_slice(3) {|row| winning_grid_rows << row}
-  winning_grid_rows
+  winning_grid
 end
 
 describe Board do
   let(:board) { Board.new }
 
   describe '#initialize' do
-    let(:input_grid) { [["X","X"," "],[" "," "," "],[" "," "," "]]}
+    let(:input_grid) { ["X","X"," "," "," "," "," "," "," "]}
 
     it 'should generate a valid board with 3x3 grid' do
-      expect(board.grid.length).to eq(3)
-      board.grid.each do |row|
-        expect(row.length).to eq(3)
-      end
+      expect(board.grid.length).to eq(9)
     end
 
     it 'should generate the correct grid based on input array' do
@@ -35,9 +30,6 @@ describe Board do
   end
 
   describe '#winner_exists?' do
-
-
-
     it 'should return true if winning pattern is found' do
       winning_board = Board.new(create_winning_grid(board.winning_pattern))
       expect(winning_board.winner_exists?).to be true
@@ -55,14 +47,12 @@ describe Board do
     end
 
     it 'should return true if no empty spaces on board' do
-      full_grid = "XXXXXXXXX".split("")
-      board.grid = Array.new(3){full_grid.shift(3)}
+      board.grid = "XXXXXXXXX".split("") 
       allow(board).to receive(:winner_exists?).and_return(false)
       expect(board.tie?).to be true
     end
     it 'should return false if there are empty spaces on board' do
-      not_full_grid = "XXXXXXXX ".split("")
-      board.grid = Array.new(3){not_full_grid.shift(3)}
+      board.grid = "XXXXXXXX ".split("")
       expect(board.tie?).to be false
     end
   end
@@ -75,7 +65,7 @@ describe Board do
 
     it 'should return 2 if player 2 won' do
       winning_board = Board.new(create_winning_grid(board.winning_pattern))
-      winning_board.grid = winning_board.grid.each{|row| row.each {|value| value.gsub!("X", "O")}}
+      winning_board.grid = winning_board.grid.each{|value| value.gsub!("X", "O")}
       expect(winning_board.find_winner).to eq(2)
     end
 
