@@ -13,9 +13,14 @@ class Board
       player_1_moves << index if cell == "X"
       player_2_moves << index if cell == "O"
     }
-    return 1 if winning_pattern.include?(player_1_moves)
-    return 2 if winning_pattern.include?(player_2_moves)
-    return false
+
+    return 1 if winning_pattern.any? {|win_pat| 
+      win_pat.all?{ |cell| player_1_moves.include?(cell) }
+    }
+    return 2 if winning_pattern.any? {|win_pat| 
+      win_pat.all?{ |cell| player_2_moves.include?(cell) }
+    }
+    return nil
   end
 
   def winning_pattern
@@ -55,7 +60,7 @@ class Board
     available_spaces
   end
 
-  def reset(position)
+  def reset_space(position)
     @grid[position] = " "
   end
 end

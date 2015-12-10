@@ -69,8 +69,8 @@ describe Board do
       expect(winning_board.find_winner).to eq(2)
     end
 
-    it 'should return false if no player won' do
-      expect(board.find_winner).to be false
+    it 'should return nil if no player won' do
+      expect(board.find_winner).to be nil
     end
   end
 
