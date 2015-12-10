@@ -13,6 +13,7 @@ class TicTacToeGame
   def start_new_game
     @board = Board.new
     @current_player = 1
+    puts "You are Player 1, the computer is Player 2, the game begins now!"
   end
 
   def set_board(board)
@@ -34,12 +35,13 @@ class TicTacToeGame
   def play
     until game_over?
       puts_board
-      puts "Play your move"
+      puts "Play your move(insert 0-8 depending on array index)"
       input = gets.chomp
       @board.play_move(player: @current_player, position: input.to_i)
       break if game_over?
-      switch_player
       puts_board
+      puts "Please wait while the computer makes its move"
+      switch_player
       comp = CompPlayer.new(@current_player)
       comp_move = comp.get_best_move(@board, 0, @current_player)
       @board.play_move(player: @current_player, position: comp_move)
