@@ -1,6 +1,10 @@
-class TicTacToeGame < ActiveRecord::Base
+require_relative 'board'
+
+class TicTacToeGame
+  attr_accessor :board
+  
   def initialize
-    super
-    self.board = Array.new(3){ Array.new(3) }
+    self.board = Board.new
   end
+
 end

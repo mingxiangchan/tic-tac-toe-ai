@@ -17,9 +17,9 @@ ActiveRecord::Schema.define(version: 20151210130029) do
   enable_extension "plpgsql"
 
   create_table "tic_tac_toe_games", force: :cascade do |t|
-    t.text     "board",      default: [],              array: true
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.text     "board"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
