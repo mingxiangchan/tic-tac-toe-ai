@@ -4,16 +4,30 @@ describe Board do
   let(:board) { Board.new }
 
   describe '#initialize' do
+    let(:input_grid) { [["X","X"," "],["","",""],["","",""]]}
+
     it 'should generate a valid board with 3x3 grid' do
       expect(board.grid.length).to eq(3)
       board.grid.each do |row|
         expect(row.length).to eq(3)
       end
     end
+
+    it 'should generate the correct grid based on input array' do
+      new_board = Board.new(input_grid)
+      expect(new_board.grid).to eq(input_grid)
+    end
   end
 
   describe '#winner_exists?' do
+    let(:winning_pattern) {}
+    it 'should return true if winning pattern is found' do
 
+    end
+
+    it 'should return false if winning pattern is not found' do
+
+    end
   end
 
   describe '#tie?' do

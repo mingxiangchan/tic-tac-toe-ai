@@ -1,8 +1,9 @@
 class Board
   attr_accessor :grid
 
-  def initialize
-    self.grid = Array.new(3){ Array.new(3){" "}}
+  def initialize(grid=nil)
+    grid ||= Array.new(3){ Array.new(3){" "}}
+    @grid = grid
   end
 
   def winner_exists?
@@ -10,7 +11,7 @@ class Board
 
   def tie?
     return false if winner_exists?
-    return false if self.grid.flatten.include?(" ")
+    return false if @grid.flatten.include?(" ")
     return true
   end
 end
