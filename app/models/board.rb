@@ -9,5 +9,8 @@ class Board
   end
 
   def tie?
+    return false if winner_exists?
+    return false if self.grid.flatten.include?(" ")
+    return true
   end
 end
