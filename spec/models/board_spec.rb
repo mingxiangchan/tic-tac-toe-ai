@@ -73,4 +73,18 @@ describe Board do
       expect(board.find_winner).to be false
     end
   end
+
+  describe 'play_move' do
+    it 'should place the move on the correct board position' do
+      position = rand(0..8)
+      board.play_move(player: 1, position: position)
+      expect(board.grid[position]).to eq("X")
+    end
+
+    it 'should place the correct players move on the board' do
+      position = rand(0..8)
+      board.play_move(player: 2, position: position)
+      expect(board.grid[position]).to eq("O")
+    end
+  end
 end

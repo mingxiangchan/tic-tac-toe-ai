@@ -41,4 +41,12 @@ class Board
     return false if winner_exists?
     return true
   end
+
+  def play_move(move={})
+    if move[:player] == 1
+      grid[move[:position]] = "X"
+    elsif move[:player] == 2
+      grid[move[:position]] = "O"
+    end   
+  end
 end
